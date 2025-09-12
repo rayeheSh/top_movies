@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:top_movies/widgets/filter_widget.dart';
+import 'package:top_movies/widgets/navigation_bar.dart';
+import 'package:top_movies/widgets/playing_widget.dart';
 import 'package:top_movies/widgets/search_widget.dart';
+import 'package:top_movies/widgets/trending_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -48,6 +52,194 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+
+            SizedBox(height: 16),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Now playing',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 12),
+
+                PlayingWidget(
+                  img: 'assets/images/john_wick.jpg',
+                  title: 'John Wick:Chapter 4',
+                  rating: '8.5',
+                ),
+              ],
+            ),
+
+            SizedBox(height: 16),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Trending',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'View all',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 12),
+
+                SingleChildScrollView(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: '2020',
+                      ),
+
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: '2020',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 16),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'New Releases - Movies',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'View all',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 12),
+
+                SingleChildScrollView(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: '2020',
+                      ),
+
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: '2020',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 16),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'New Releases - TV Shows',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'View all',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 12),
+
+                SingleChildScrollView(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: 'S01E01',
+                      ),
+
+                      TrendingWidget(
+                        img: 'assets/images/john_wick.jpg',
+                        title: 'John Wick',
+                        year: '2020',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),

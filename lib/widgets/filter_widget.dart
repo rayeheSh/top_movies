@@ -14,10 +14,8 @@ class FilterWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: selected
-              ? Color.fromRGBO(47, 47, 47, 1)
-              : Colors.transparent, // Dark for selected, light for unselected
-          borderRadius: BorderRadius.circular(30), // Rounded corners
+          color: selected ? Color.fromRGBO(47, 47, 47, 1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(30),
           border: BoxBorder.all(color: Colors.white, width: 1.3),
         ),
         child: Text(
@@ -48,10 +46,8 @@ class MainFilterWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: selected
-              ? Color.fromRGBO(47, 47, 47, 1)
-              : Colors.transparent, // Dark for selected, light for unselected
-          borderRadius: BorderRadius.circular(30.0), // Rounded corners
+          color: selected ? Color.fromRGBO(47, 47, 47, 1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(30.0),
           border: BoxBorder.all(color: Colors.white, width: 1.3),
         ),
         child: Row(
