@@ -16,19 +16,20 @@ class TrendingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: 12,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           height: 163,
           width: 120,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover),
+            image: DecorationImage(image: NetworkImage(img),fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(10),
           ),
         ),
 
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 10,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 8,
           children: [
             Text(
               title,
