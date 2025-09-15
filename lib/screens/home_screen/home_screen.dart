@@ -168,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: 16),
 
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,41 +195,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
 
-                        SizedBox(height: 12),
-
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.only(right: 16),
-                          child: Row(
-                            spacing: 10,
-                            children: [
-                              TrendingWidget(
-                                img: movieList[0].poster,
-                                /*'assets/images/john_wick.jpg'*/
-                                title: movieList[0].title,
-                                year: movieList[0].year,
-                              ),
-
-                              TrendingWidget(
-                                img: movieList[1].poster,
-                                /*'assets/images/john_wick.jpg'*/
-                                title: movieList[1].title,
-                                year: movieList[1].year,
-                              ),
-
-                              TrendingWidget(
-                                img: movieList[2].poster,
-                                /*'assets/images/john_wick.jpg'*/
-                                title: movieList[2].title,
-                                year: movieList[2].year,
-                              ),
-                            ],
+                        SizedBox(
+                          height: 250,
+                          child: ListView.builder(
+                            itemCount: movieList.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return TrendingWidget(
+                                movie: movieList[index],
+                                onTap: () {
+                                  
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 16),
                   ],
                 ),
               ),
