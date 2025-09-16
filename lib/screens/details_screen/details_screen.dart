@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:top_movies/models/movie_details.dart';
 import 'package:top_movies/services/api_service.dart';
-import 'package:top_movies/widgets/filter_widget.dart';
 import 'package:top_movies/widgets/genre_widget.dart';
 
 class DetailsScreen extends StatefulWidget {

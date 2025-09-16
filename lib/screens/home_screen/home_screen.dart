@@ -29,6 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
     loadGenres();
   }
 
+  String selectedFilter = 'All Categories';
+  void changeSelected(String newFilter) {
+    setState(() {
+      selectedFilter = newFilter;
+    });
+  }
+
   Future<void> loadMovies() async {
     if (!mounted) return;
 
@@ -113,31 +120,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         spacing: 8,
                         children: [
                           MainFilterWidget(
-                            lable: 'All categories',
-                            selected: false,
-                            onTap: () {},
-                          ),
-                          FilterWidget(
-                            lable: genreList[0].name,
-                            selected: false,
-                            onTap: () {},
-                          ),
-                          FilterWidget(
-                            lable: genreList[1].name,
-                            selected: false,
-                            onTap: () {},
+                            lable: 'All Categories',
+                            selected: selectedFilter == 'All categories',
+                            onTap: () => changeSelected('All categories'),
                           ),
 
-                          FilterWidget(
-                            lable: genreList[2].name,
-                            selected: false,
-                            onTap: () {},
-                          ),
-
-                          FilterWidget(
-                            lable: genreList[3].name,
-                            selected: false,
-                            onTap: () {},
+                          SizedBox(
+                            width: 1000,
+                            height: 50,
+                            child: ListView.builder(
+                              itemCount: genreList.length-10,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return FilterWidget(
+                                  lable: genreList[index].name,
+                                  selected:
+                                      selectedFilter == genreList[index].name,
+                                  onTap: () =>
+                                      changeSelected(genreList[index].name),
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
