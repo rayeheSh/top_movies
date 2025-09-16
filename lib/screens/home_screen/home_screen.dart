@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:top_movies/models/genres.dart';
 import 'package:top_movies/models/movie.dart';
+import 'package:top_movies/screens/details_screen/details_screen.dart';
 import 'package:top_movies/services/api_service.dart';
 import 'package:top_movies/widgets/filter_widget.dart';
 import 'package:top_movies/widgets/playing_widget.dart';
@@ -204,7 +205,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               return TrendingWidget(
                                 movie: movieList[index],
                                 onTap: () {
-                                  
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                        movieId: movieList[index].id,
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             },

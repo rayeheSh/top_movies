@@ -19,11 +19,14 @@ class TrendingWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                movie.poster,
-                height: 160,
-                width: 130,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: movie.title,
+                child: Image.network(
+                  movie.poster,
+                  height: 160,
+                  width: 130,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
 

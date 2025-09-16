@@ -5,12 +5,18 @@ class FilterWidget extends StatelessWidget {
   final dynamic selected;
   final dynamic lable;
   final dynamic onTap;
-  const FilterWidget({super.key, this.selected, this.lable, this.onTap});
+  const FilterWidget({
+    super.key,
+    this.selected,
+    this.lable,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(30),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(

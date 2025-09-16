@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:top_movies/constants/constants.dart';
 import 'package:top_movies/models/genres.dart';
 import 'package:top_movies/models/movie.dart';
+import 'package:top_movies/models/movie_details.dart';
 
 class ApiService {
   Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
@@ -17,6 +18,15 @@ class ApiService {
     }
   }
 
+  Future<MovieDetails> getMovieDetails(int id) async {
+    try {
+      Response response = await dio.get('/movies/$id');
+      return MovieDetails.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Failed to load movie details: $e');
+    }
+  }
+
   getGenres() async {
     try {
       Response response = await dio.get('/genres');
@@ -26,13 +36,4 @@ class ApiService {
       throw Exception('Failed to load list of genres: $e');
     }
   }
-
-  /*getMoviesDetails(String id) async {
-    try {
-      Response response = await dio.get('/movies/$id');
-      dynamic data = response.data;
-    } catch (e) {
-      throw Exception('Failed to load movie details: $e');
-    }
-  }*/
 }
