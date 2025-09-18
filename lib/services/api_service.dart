@@ -27,7 +27,7 @@ class ApiService {
     }
   }
 
-  getGenres() async {
+  Future<List<GenreList>> getGenres() async {
     try {
       Response response = await dio.get('/genres');
       List<dynamic> data = response.data;
@@ -36,4 +36,5 @@ class ApiService {
       throw Exception('Failed to load list of genres: $e');
     }
   }
+
 }

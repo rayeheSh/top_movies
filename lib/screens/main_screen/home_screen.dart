@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:top_movies/models/genre_movie.dart';
 import 'package:top_movies/models/genres.dart';
 import 'package:top_movies/models/movie.dart';
 import 'package:top_movies/screens/details_screen/details_screen.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ApiService apiService = ApiService();
   List<Movie> movieList = [];
   List<GenreList> genreList = [];
+  List<Movie> filteredMovies = [];
   bool isLoading = false;
 
   @override
@@ -27,13 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loadMovies();
     loadGenres();
-  }
-
-  String selectedFilter = 'All Categories';
-  void changeSelected(String newFilter) {
-    setState(() {
-      selectedFilter = newFilter;
-    });
   }
 
   Future<void> loadMovies() async {
@@ -45,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       movieList = await apiService.getMovies();
+      filteredMovies = movieList;
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -84,6 +80,20 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String selectedFilter = 'All Categories';
+  void changeSelected(String newFilter) {
+    setState(() {
+      selectedFilter = newFilter;
+      if (selectedFilter == 'All Categories') {
+        filteredMovies = movieList;
+      } else {
+        filteredMovies = movieList
+            .where((movie) => movie.genres.contains(selectedFilter))
+            .toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,15 +131,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           MainFilterWidget(
                             lable: 'All Categories',
-                            selected: selectedFilter == 'All categories',
-                            onTap: () => changeSelected('All categories'),
+                            selected: selectedFilter == 'All Categories',
+                            onTap: () => changeSelected('All Categories'),
                           ),
 
                           SizedBox(
                             width: 1000,
                             height: 50,
                             child: ListView.builder(
-                              itemCount: genreList.length-10,
+                              itemCount: genreList.length - 10,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return FilterWidget(
@@ -202,17 +212,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 250,
                           child: ListView.builder(
-                            itemCount: movieList.length,
+                            itemCount: filteredMovies.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return TrendingWidget(
-                                movie: movieList[index],
+                                movie: filteredMovies[index],
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => DetailsScreen(
-                                        movieId: movieList[index].id,
+                                        movieId: filteredMovies[index].id,
                                       ),
                                     ),
                                   );
