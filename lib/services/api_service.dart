@@ -36,5 +36,4 @@ class ApiService {
       throw Exception('Failed to load list of genres: $e');
     }
   }
-
 }
