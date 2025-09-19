@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:top_movies/providers/watchlist_provider.dart';
 import 'package:top_movies/screens/main_screen/main_screen.dart';
 
 void main() {
@@ -18,10 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Top Movies',
-      debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WatchlistProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Top Movies',
+        debugShowCheckedModeBanner: false,
+        home: MainScreen(),
+      ),
     );
   }
 }

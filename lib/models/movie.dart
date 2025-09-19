@@ -8,7 +8,7 @@ class Movie {
   final List<String> genres;
   final List<String> images;
 
-  Movie({
+  Movie( {
     required this.id,
     required this.title,
     required this.poster,

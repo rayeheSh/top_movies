@@ -11,7 +11,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Widget> screens = [const HomeScreen(),const WatchlistScreen()];
+  final List<Widget> screens = [const HomeScreen(), const WatchlistScreen()];
 
   int pageIndex = 0;
   void changeNavIndex(int newIndex) {
