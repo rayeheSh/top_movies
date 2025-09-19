@@ -36,4 +36,15 @@ class ApiService {
       throw Exception('Failed to load list of genres: $e');
     }
   }
+
+  Future<List<Movie>> searchMovies(String title) async {
+    try {
+      Response respons = await dio.get('movies?q=$title');
+      List<dynamic> data = respons.data['data'];
+
+      return data.map((json) => Movie.fromJson(json)).toList();
+    } catch (e) {
+      throw Exception('Failed to load list of movies: $e');
+    }
+  }
 }
