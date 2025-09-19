@@ -13,6 +13,7 @@ class FilterWidget extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(30),
       child: Container(
+        margin: EdgeInsetsGeometry.only(right: 4),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: selected ? Colors.white : Colors.transparent,
@@ -43,6 +44,7 @@ class MainFilterWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsetsGeometry.only(right: 4),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: selected ? Colors.white : Colors.transparent,

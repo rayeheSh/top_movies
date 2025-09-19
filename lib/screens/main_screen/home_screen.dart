@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:top_movies/models/genre_movie.dart';
 import 'package:top_movies/models/genres.dart';
 import 'package:top_movies/models/movie.dart';
 import 'package:top_movies/screens/details_screen/details_screen.dart';
@@ -117,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
           : RefreshIndicator(
               onRefresh: loadMovies,
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(18),
                 child: Column(
                   children: [
                     SearchWidget(),
@@ -127,7 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        spacing: 8,
                         children: [
                           MainFilterWidget(
                             lable: 'All Categories',

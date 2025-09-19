@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:top_movies/screens/main_screen/home_screen.dart';
+import 'package:top_movies/screens/main_screen/watchlist_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,7 +11,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Widget> screens = [const HomeScreen()];
+  final List<Widget> screens = [const HomeScreen(),const WatchlistScreen()];
 
   int pageIndex = 0;
   void changeNavIndex(int newIndex) {
@@ -23,7 +24,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(52, 52, 74, 1),
-      body: screens[pageIndex],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: screens[pageIndex],
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Container(
