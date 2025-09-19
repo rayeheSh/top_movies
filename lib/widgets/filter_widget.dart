@@ -13,7 +13,7 @@ class FilterWidget extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        margin: EdgeInsetsGeometry.only(right: 4),
+        margin: EdgeInsetsGeometry.only(right: 6),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: selected ? Colors.white : Colors.transparent,
@@ -22,7 +22,7 @@ class FilterWidget extends StatelessWidget {
         ),
         child: Text(
           lable,
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.poppins(
             fontSize: 16,
             color: selected ? Colors.black : Color.fromRGBO(197, 197, 197, 1),
             fontWeight: FontWeight.w500,
@@ -44,7 +44,7 @@ class MainFilterWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsetsGeometry.only(right: 4),
+        margin: EdgeInsetsGeometry.only(right: 6),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: selected ? Colors.white : Colors.transparent,
@@ -60,7 +60,7 @@ class MainFilterWidget extends StatelessWidget {
             ),
             Text(
               lable,
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: selected
                     ? Colors.black

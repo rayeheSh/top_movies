@@ -14,7 +14,7 @@ class SearchWidget extends StatelessWidget {
       width: double.infinity,
       child: TextField(
         decoration: InputDecoration(
-          hintStyle: GoogleFonts.roboto(
+          hintStyle: GoogleFonts.poppins(
             color: Color.fromRGBO(136, 136, 136, 1),
             fontWeight: FontWeight.w600,
             fontSize: 16,
