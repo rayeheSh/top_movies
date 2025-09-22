@@ -69,13 +69,13 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 
 class WatchlistItem extends StatelessWidget {
   final Movie movie;
-  final screenW;
-  final screenH;
+  final double screenW;
+  final double screenH;
   const WatchlistItem({
     super.key,
     required this.movie,
-    this.screenW,
-    this.screenH,
+    required this.screenW,
+    required this.screenH,
   });
 
   @override

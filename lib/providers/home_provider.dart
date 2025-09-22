@@ -20,7 +20,6 @@ class HomeProvider extends ChangeNotifier {
   String? _searchQuery;
   Timer? _debounce;
   String? get errorMessage => _errorMessage;
-
   List<Movie> get searchResults => _searchResults;
   bool get isSearching => _isSearching;
   String? get searchQuery => _searchQuery;
@@ -63,8 +62,6 @@ class HomeProvider extends ChangeNotifier {
       }
     });
   }
-
-  // Other methods like refreshData, changeSelected..
 
   Future<void> loadMovies() async {
     setLoading(true);

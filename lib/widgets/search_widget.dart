@@ -32,7 +32,6 @@ class SearchWidget extends StatelessWidget {
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
-
           hintText: 'Search movies',
           prefixIcon: Padding(
             padding: const EdgeInsets.only(left: 10.0),

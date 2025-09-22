@@ -96,7 +96,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 250,
+                                  width: screenSize.width * 0.5,
                                   height: 50,
                                   child: ListView.builder(
                                     itemCount: movieDetails.genres.length,
@@ -112,6 +112,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 Spacer(),
 
                                 Icon(Icons.timer_outlined, color: Colors.white),
+
+                                const SizedBox(width: 2),
 
                                 Text(
                                   movieDetails.runtime,
