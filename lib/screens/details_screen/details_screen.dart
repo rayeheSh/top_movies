@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:top_movies/models/movie_details.dart';
-import 'package:top_movies/services/api_service.dart';
+import 'package:provider/provider.dart';
+import 'package:top_movies/providers/detail_provider.dart';
 import 'package:top_movies/widgets/genre_widget.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -13,60 +13,45 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  ApiService apiService = ApiService();
-  late MovieDetails movieDetails;
-  bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
-    loadDetails();
-  }
-
-  Future<void> loadDetails() async {
-    if (!mounted) return;
-
-    setState(() {
-      isLoading = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<DetailProvider>(
+        context,
+        listen: false,
+      ).loadDetails(widget.movieId);
     });
-
-    try {
-      movieDetails = await apiService.getMovieDetails(widget.movieId);
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Error in loading details: $e')));
-      }
-    }
-
-    if (mounted) {
-      setState(() {
-        isLoading = false;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return isLoading
-        ? Center(child: CircularProgressIndicator())
-        : RefreshIndicator(
-            onRefresh: loadDetails,
+    return Consumer<DetailProvider>(
+      builder: (context, detailProvider, child) {
+        if (detailProvider.isLoading || detailProvider.movieDetails == null) {
+          return const Scaffold(
+            backgroundColor: Color.fromRGBO(52, 52, 74, 1),
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else {
+          final movie = detailProvider.movieDetails!;
+          return RefreshIndicator(
+            onRefresh: () =>
+                detailProvider.refreshData(widget.movieId),
             child: Scaffold(
               backgroundColor: Color.fromRGBO(52, 52, 74, 1),
               body: SingleChildScrollView(
                 child: Stack(
                   children: [
                     Hero(
-                      tag: movieDetails.title,
+                      tag: movie.title,
                       child: Container(
                         width: screenSize.width,
                         height: screenSize.height * 0.49,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(movieDetails.poster),
+                            image: NetworkImage(movie.poster),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -85,7 +70,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           spacing: 18,
                           children: [
                             Text(
-                              movieDetails.title,
+                              movie.title,
                               style: GoogleFonts.poppins(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
@@ -99,11 +84,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   width: screenSize.width * 0.5,
                                   height: 50,
                                   child: ListView.builder(
-                                    itemCount: movieDetails.genres.length,
+                                    itemCount: movie.genres.length,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return GenreWidget(
-                                        lable: movieDetails.genres[index],
+                                        lable: movie.genres[index],
                                       );
                                     },
                                   ),
@@ -116,7 +101,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 const SizedBox(width: 2),
 
                                 Text(
-                                  movieDetails.runtime,
+                                  movie.runtime,
                                   style: GoogleFonts.poppins(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -139,7 +124,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
 
                                     Text(
-                                      movieDetails.year,
+                                      movie.year,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16,
@@ -157,7 +142,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
 
                                     Text(
-                                      movieDetails.imdbRating,
+                                      movie.imdbRating,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16,
@@ -170,10 +155,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
 
                             Text(
-                              movieDetails.plot,
+                              movie.plot,
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 16,
                               ),
                             ),
@@ -203,31 +188,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
                                     TableCell(
                                       child: Text(
-                                        ': ${movieDetails.country}',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Text(
-                                        'Genre',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Text(
-                                        ': ${movieDetails.genres[0]}, ${movieDetails.genres[1]}',
+                                        ':  ${movie.country}',
                                         style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,
@@ -251,7 +212,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
                                     TableCell(
                                       child: Text(
-                                        ': ${movieDetails.released}',
+                                        ':  ${detailProvider.movieDetails!.released}',
                                         style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,
@@ -275,7 +236,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
                                     TableCell(
                                       child: Text(
-                                        ': ${movieDetails.director}',
+                                        ':  ${movie.director}',
                                         style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,
@@ -328,5 +289,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
             ),
           );
+        }
+      },
+    );
   }
 }

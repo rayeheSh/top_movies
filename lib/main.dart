@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:top_movies/providers/detail_provider.dart';
 import 'package:top_movies/providers/home_provider.dart';
 import 'package:top_movies/providers/main_provider.dart';
 import 'package:top_movies/providers/watchlist_provider.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WatchlistProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => MainProvider()),
+        ChangeNotifierProvider(create: (context) => DetailProvider()),
       ],
       child: MaterialApp(
         title: 'Top Movies',
