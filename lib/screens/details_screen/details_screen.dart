@@ -81,10 +81,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: screenSize.width * 0.5,
+                                  width: screenSize.width*0.5,
                                   height: 50,
                                   child: ListView.builder(
-                                    itemCount: movie.genres.length,
+                                    itemCount: 2,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return GenreWidget(

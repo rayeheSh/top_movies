@@ -21,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch initial data for the home screen when it's first built.
-    // This is typically done in initState.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<HomeProvider>(context, listen: false).loadMovies();
     });
@@ -84,22 +82,30 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         SizedBox(
           height: 50,
-          child: ListView.builder(
-            itemCount: provider.genreList.length,
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return FilterWidget(
-                lable: provider.genreList[index].name,
-                selected:
-                    provider.selectedFilter == provider.genreList[index].name,
-                onTap: () =>
-                    provider.changeSelected(provider.genreList[index].name),
-              );
-            },
+            child: Row(
+              children: [
+                MainFilterWidget(
+                  lable: 'All Categories',
+                  selected: true,
+                  onTap: () => provider.changeSelected('All Categories'),
+                ),
+
+                ...provider.genreList.map((genre) {
+                  return FilterWidget(
+                    lable: genre.name,
+                    selected: provider.selectedFilter == genre.name,
+                    onTap: () => provider.changeSelected(genre.name),
+                  );
+                }),
+              ],
+            ),
           ),
         ),
+
         const SizedBox(height: 18),
-        // PlayingWidget(...),
+
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -111,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
 
             PlayingWidget(
               img: 'assets/images/john_wick.jpg',
@@ -205,8 +211,13 @@ Widget _buildSearchResults(HomeProvider provider) {
         ),
         const SizedBox(height: 8),
         Text(
-          'We are sorry we cannot find the movie.',
-          style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16),
+          'We are sorry we cannot find the movie. We are constantly updating the app to contain all what you want.',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            color: Colors.white70,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
@@ -215,7 +226,6 @@ Widget _buildSearchResults(HomeProvider provider) {
       itemCount: provider.searchResults.length,
       itemBuilder: (context, index) {
         final movie = provider.searchResults[index];
-        // Use your search result widget here
         return SearchResultWidget(movie: movie);
       },
     );

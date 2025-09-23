@@ -18,14 +18,16 @@ class FilterWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(30),
-          border: BoxBorder.all(color: Colors.white, width: 1.3),
+          border: BoxBorder.all(color: Colors.white, width: 1.2),
         ),
-        child: Text(
-          lable,
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            color: selected ? Colors.black : Color.fromRGBO(197, 197, 197, 1),
-            fontWeight: FontWeight.w500,
+        child: Center(
+          child: Text(
+            lable,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: selected ? Colors.black : Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
@@ -54,17 +56,12 @@ class MainFilterWidget extends StatelessWidget {
         child: Row(
           spacing: 8,
           children: [
-            Icon(
-              Icons.category,
-              color: selected ? Colors.black : Color.fromRGBO(197, 197, 197, 1),
-            ),
+            Icon(Icons.category, color: selected ? Colors.black : Colors.white),
             Text(
               lable,
               style: GoogleFonts.poppins(
                 fontSize: 16,
-                color: selected
-                    ? Colors.black
-                    : Color.fromRGBO(197, 197, 197, 1),
+                color: selected ? Colors.black : Colors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),

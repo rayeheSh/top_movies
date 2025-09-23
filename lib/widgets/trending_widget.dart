@@ -18,51 +18,53 @@ class _TrendingWidgetState extends State<TrendingWidget> {
     final watchlistProvider = Provider.of<WatchlistProvider>(context);
     final isLiked = watchlistProvider.isMovieInWatchlist(widget.movie);
 
-    return InkWell(
-      onTap: widget.onTap,
-      child: Container(
-        width: 130,
-        margin: EdgeInsets.only(right: 12),
+    return Container(
+      width: 130,
+      margin: EdgeInsets.only(right: 12),
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Hero(
-                    tag: widget.movie.title,
-                    child: Image.network(
-                      widget.movie.poster,
-                      height: 160,
-                      width: 130,
-                      fit: BoxFit.cover,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Hero(
+                      tag: widget.movie.title,
+                      child: Image.network(
+                        widget.movie.poster,
+                        height: 160,
+                        width: 130,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
 
-                SizedBox(height: 8),
+                  SizedBox(height: 8),
 
-                Text(
-                  widget.movie.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    widget.movie.title,
+                    softWrap: true,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
 
-                Text(
-                  widget.movie.year,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                  Text(
+                    widget.movie.year,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
             Positioned(
