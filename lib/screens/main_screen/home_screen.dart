@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:top_movies/providers/home_provider.dart';
@@ -200,6 +201,7 @@ Widget _buildSearchResults(HomeProvider provider) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        SvgPicture.asset('assets/images/Group.svg'),
         const SizedBox(height: 20),
         Text(
           'Not Found',
@@ -211,7 +213,7 @@ Widget _buildSearchResults(HomeProvider provider) {
         ),
         const SizedBox(height: 8),
         Text(
-          'We are sorry we cannot find the movie. We are constantly updating the app to contain all what you want.',
+          'We are sorry we cannot find the movie.\nWe are constantly updating the app to\ncontain all what you want.',
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             color: Colors.white70,

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class SearchWidget extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
+
   const SearchWidget({
     super.key,
     required this.controller,
@@ -28,8 +29,8 @@ class SearchWidget extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           hintStyle: GoogleFonts.poppins(
-            color: Color.fromRGBO(136, 136, 136, 1),
-            fontWeight: FontWeight.w600,
+            color: Colors.white70,
+            fontWeight: FontWeight.w400,
             fontSize: 16,
           ),
           hintText: 'Search movies',

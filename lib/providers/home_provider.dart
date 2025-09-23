@@ -12,20 +12,21 @@ class HomeProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   String selectedFilter = 'All Categories';
-  String? _errorMessage;
-
-  // New Search properties
-  List<Movie> _searchResults = [];
-  bool _isSearching = false; // To determine if the user is in search mode
   String? _searchQuery;
-  Timer? _debounce;
-  String? get errorMessage => _errorMessage;
-  List<Movie> get searchResults => _searchResults;
-  bool get isSearching => _isSearching;
   String? get searchQuery => _searchQuery;
+  Timer? _debounce;
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+  List<Movie> _searchResults = [];
+  List<Movie> get searchResults => _searchResults;
+  bool _isSearching = false;
+  bool get isSearching => _isSearching;
 
-  // The updated searchMovies method
-  void searchMovies(String query) {
+  List<Movie> _previousSearchResults = [];
+  String? get previousSearchQuery => _previousSearchQuery;
+  String? _previousSearchQuery;
+
+  Future<void> searchMovies(String query) async {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _searchQuery = query;
@@ -33,12 +34,13 @@ class HomeProvider extends ChangeNotifier {
     if (query.isEmpty) {
       _isSearching = false;
       _searchResults = [];
+      _previousSearchResults = [];
       _errorMessage = '';
       notifyListeners();
       return;
     }
 
-    _isSearching = true; // Enter search mode
+    _isSearching = true;
     notifyListeners();
 
     _debounce = Timer(const Duration(milliseconds: 500), () async {
@@ -47,11 +49,27 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
 
       try {
-        //_searchResults = await apiService.searchMovies(query);
-        _searchResults = movieList
-            .where((element) => element.title.contains(_searchQuery!))
-            .toList();
-        _errorMessage = ''; // Clear any previous error
+        if (query.toLowerCase().startsWith(
+          _previousSearchQuery?.toLowerCase() ?? '',
+        )) {
+          _searchResults = _previousSearchResults
+              .where(
+                (movie) =>
+                    movie.title.toLowerCase().contains(query.toLowerCase()),
+              )
+              .toList();
+        } else {
+          _searchResults = movieList
+              .where(
+                (movie) =>
+                    movie.title.toLowerCase().contains(query.toLowerCase()),
+              )
+              .toList();
+        }
+        _previousSearchResults = _searchResults;
+        _previousSearchQuery = query;
+
+        _errorMessage = '';
       } catch (e) {
         _errorMessage = 'Failed to load movies. Please try again.';
         _searchResults = [];
@@ -70,10 +88,9 @@ class HomeProvider extends ChangeNotifier {
       filteredMovies = movieList;
       genreList = await apiService.getGenres();
     } catch (e) {
-      // Handle potential errors here
       print('Error loading movies: $e');
     } finally {
-      setLoading(false); // Turn off loading, regardless of success or failure
+      setLoading(false);
     }
     notifyListeners();
   }

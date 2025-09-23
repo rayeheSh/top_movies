@@ -12,11 +12,11 @@ class SearchResultWidget extends StatelessWidget {
     final screenW = MediaQuery.of(context).size.width;
     final screenH = MediaQuery.of(context).size.height;
     return Container(
-      height: screenH * 0.2,
+      height: screenH * 0.18,
       margin: EdgeInsetsGeometry.only(bottom: 12),
       width: screenW,
       decoration: BoxDecoration(
-        border: BoxBorder.all(color: Colors.white, width: 1),
+        border: BoxBorder.all(color: Colors.white, width: 2),
         borderRadius: BorderRadiusGeometry.all(Radius.circular(6)),
       ),
       child: InkWell(
@@ -50,56 +50,59 @@ class SearchResultWidget extends StatelessWidget {
             ),
 
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    softWrap: true,
-                    movie.title,
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      softWrap: true,
+                      movie.title,
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Row(
-                    spacing: 16,
-                    children: [
-                      Row(
-                        spacing: 4,
-                        children: [
-                          Icon(Icons.calendar_month, color: Colors.white),
+                    Row(
+                      spacing: 16,
+                      children: [
+                        Row(
+                          spacing: 4,
+                          children: [
+                            Icon(Icons.calendar_month, color: Colors.white),
 
-                          Text(
-                            movie.year,
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Colors.white,
+                            Text(
+                              movie.year,
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
-                      Row(
-                        spacing: 2,
-                        children: [
-                          Icon(Icons.star_rounded, color: Colors.white),
+                        Row(
+                          spacing: 2,
+                          children: [
+                            Icon(Icons.star_rounded, color: Colors.white),
 
-                          Text(
-                            movie.imdbRating,
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Colors.white,
+                            Text(
+                              movie.imdbRating,
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
