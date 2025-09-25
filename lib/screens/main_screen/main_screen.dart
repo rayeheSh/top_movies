@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:top_movies/providers/main_provider.dart';
 import 'package:top_movies/screens/main_screen/home_screen.dart';
+import 'package:top_movies/screens/main_screen/profile_screen.dart';
 import 'package:top_movies/screens/main_screen/watchlist_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,7 +15,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Widget> screens = [const HomeScreen(), const WatchlistScreen()];
+  final List<Widget> screens = [
+    const HomeScreen(),
+    const WatchlistScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
