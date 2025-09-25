@@ -202,7 +202,7 @@ Widget _buildSearchResults(HomeProvider provider) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset('assets/images/Group.svg'),
-        const SizedBox(height: 20),
+        const SizedBox(height: 18),
         Text(
           'Not Found',
           style: GoogleFonts.poppins(
@@ -213,8 +213,9 @@ Widget _buildSearchResults(HomeProvider provider) {
         ),
         const SizedBox(height: 8),
         Text(
-          'We are sorry we cannot find the movie.\nWe are constantly updating the app to\ncontain all what you want.',
+          'We are sorry we cannot find the movie you wanted.',
           textAlign: TextAlign.center,
+          softWrap: true,
           style: GoogleFonts.poppins(
             color: Colors.white70,
             fontSize: 16,
