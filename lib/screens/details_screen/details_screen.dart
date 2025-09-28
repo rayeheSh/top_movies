@@ -37,8 +37,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         } else {
           final movie = detailProvider.movieDetails!;
           return RefreshIndicator(
-            onRefresh: () =>
-                detailProvider.refreshData(widget.movieId),
+            onRefresh: () => detailProvider.refreshData(widget.movieId),
             child: Scaffold(
               backgroundColor: Color.fromRGBO(52, 52, 74, 1),
               body: SingleChildScrollView(
@@ -81,7 +80,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: screenSize.width*0.5,
+                                  width: screenSize.width * 0.5,
                                   height: 50,
                                   child: ListView.builder(
                                     itemCount: 2,

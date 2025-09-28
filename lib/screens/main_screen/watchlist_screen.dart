@@ -66,6 +66,7 @@ class WatchlistItem extends StatelessWidget {
   final Movie movie;
   final double screenW;
   final double screenH;
+
   const WatchlistItem({
     super.key,
     required this.movie,
@@ -75,101 +76,117 @@ class WatchlistItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: screenH * 0.18,
-      margin: EdgeInsetsGeometry.only(bottom: 12),
-      width: screenW,
-      decoration: BoxDecoration(
-        border: BoxBorder.all(color: Colors.white, width: 2),
-        borderRadius: BorderRadiusGeometry.all(Radius.circular(6)),
+    final watchlistProvider = Provider.of<WatchlistProvider>(context);
+    return Dismissible(
+      key: Key(movie.id.toString()),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        padding: EdgeInsets.only(right: 20),
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.red.shade400,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Icon(Icons.delete, color: Colors.white, size: 30),
       ),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsScreen(movieId: movie.id),
-            ),
-          );
-        },
-        child: Row(
-          spacing: 8,
-          children: [
-            Hero(
-              tag: movie.title,
-              child: Container(
-                height: screenH * 0.2,
-                width: screenW * 0.35,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadiusGeometry.directional(
-                    topStart: Radius.circular(8),
-                    bottomStart: Radius.circular(8),
-                  ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(movie.poster),
+
+      onDismissed: (direction) => watchlistProvider.toggleWatchlist(movie),
+      child: Container(
+        height: screenH * 0.18,
+        margin: EdgeInsetsGeometry.only(bottom: 12),
+        width: screenW,
+        decoration: BoxDecoration(
+          border: BoxBorder.all(color: Colors.white, width: 2),
+          borderRadius: BorderRadiusGeometry.all(Radius.circular(6)),
+        ),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsScreen(movieId: movie.id),
+              ),
+            );
+          },
+          child: Row(
+            spacing: 8,
+            children: [
+              Hero(
+                tag: movie.title,
+                child: Container(
+                  height: screenH * 0.2,
+                  width: screenW * 0.35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusGeometry.directional(
+                      topStart: Radius.circular(8),
+                      bottomStart: Radius.circular(8),
+                    ),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(movie.poster),
+                    ),
                   ),
                 ),
               ),
-            ),
 
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      softWrap: true,
-                      movie.title,
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        softWrap: true,
+                        movie.title,
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Row(
-                      spacing: 16,
-                      children: [
-                        Row(
-                          spacing: 4,
-                          children: [
-                            Icon(Icons.calendar_month, color: Colors.white),
+                      Row(
+                        spacing: 16,
+                        children: [
+                          Row(
+                            spacing: 4,
+                            children: [
+                              Icon(Icons.calendar_month, color: Colors.white),
 
-                            Text(
-                              movie.year,
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.white,
+                              Text(
+                                movie.year,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
 
-                        Row(
-                          spacing: 2,
-                          children: [
-                            Icon(Icons.star_rounded, color: Colors.white),
+                          Row(
+                            spacing: 2,
+                            children: [
+                              Icon(Icons.star_rounded, color: Colors.white),
 
-                            Text(
-                              movie.imdbRating,
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.white,
+                              Text(
+                                movie.imdbRating,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
