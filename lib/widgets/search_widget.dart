@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class SearchWidget extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
-
+  
   const SearchWidget({
     super.key,
     required this.controller,

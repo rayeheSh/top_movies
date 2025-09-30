@@ -34,6 +34,7 @@ class SearchResultWidget extends StatelessWidget {
         },
         child: Row(
           spacing: 8,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
               tag: movie.title,
@@ -54,70 +55,64 @@ class SearchResultWidget extends StatelessWidget {
             ),
 
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Text(
+                    softWrap: true,
+                    movie.title,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Row(
+                    spacing: 16,
                     children: [
-                      Text(
-                        softWrap: true,
-                        movie.title,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
                       Row(
-                        spacing: 16,
+                        spacing: 4,
                         children: [
-                          Row(
-                            spacing: 4,
-                            children: [
-                              Icon(Icons.calendar_month, color: Colors.white),
+                          Icon(Icons.calendar_month, color: Colors.white),
 
-                              Text(
-                                movie.year,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            movie.year,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
+                        ],
+                      ),
 
-                          Row(
-                            spacing: 2,
-                            children: [
-                              Icon(Icons.star_rounded, color: Colors.white),
+                      Row(
+                        spacing: 2,
+                        children: [
+                          Icon(Icons.star_rounded, color: Colors.white),
 
-                              Text(
-                                movie.imdbRating,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            movie.imdbRating,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
-
-                  IconButton(
-                    onPressed: () => watchlistProvider.toggleWatchlist(movie),
-                    icon: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_outline,
-                      color: isLiked ? Colors.red : Colors.white,
-                    ),
-                  ),
                 ],
+              ),
+            ),
+
+            IconButton(
+              onPressed: () => watchlistProvider.toggleWatchlist(movie),
+              icon: Icon(
+                isLiked ? Icons.favorite : Icons.favorite_outline,
+                color: isLiked ? Colors.red : Colors.white,
               ),
             ),
           ],
