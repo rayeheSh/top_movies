@@ -22,8 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HomeProvider>(context, listen: false).loadMovies();
+      final provider = Provider.of<HomeProvider>(context, listen: false);
+      provider.loadMovies();
+
+      _searchController.clear();
+
+      provider.onCancelSearch();
     });
   }
 

@@ -116,4 +116,16 @@ class HomeProvider extends ChangeNotifier {
   Future<void> refreshData() async {
     await loadMovies();
   }
+
+  void onCancelSearch() {
+    _isSearching = false; // <-- This is the most important flag
+    _searchQuery = '';
+    _searchResults = [];
+    _previousSearchResults = [];
+    _previousSearchQuery = null;
+    _errorMessage = '';
+    // Optional: Cancel the debounce timer if it's running
+    _debounce?.cancel();
+    notifyListeners();
+  }
 }
